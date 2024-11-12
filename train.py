@@ -32,7 +32,7 @@ def train_model(path):
     if not os.path.exists("./finetuned_model"): 
         os.makedirs("./finetuned_model")
     if not os.path.exists("./finetuned_model/label_list.txt"):
-        with open("label_list.txt", "w") as f:
+        with open("./finetuned_model/label_list.txt", "w") as f:
             for label in labels:    
                 f.write(label + "\n")
     # Define the Trainer
