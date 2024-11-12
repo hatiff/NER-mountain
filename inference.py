@@ -56,7 +56,7 @@ def merge_subwords(predictions):
     return merged_predictions
 
 
-def inference():
+def get_model():
 
     with open("finetuned_model/label_list.txt", "r") as f:
         label_list = f.read().splitlines()  
