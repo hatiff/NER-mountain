@@ -58,7 +58,7 @@ def merge_subwords(predictions):
 
 def inference(sentence):
 
-    with open("label_list.txt", "r") as f:
+    with open("finetuned_model/label_list.txt", "r") as f:
         label_list = f.read().splitlines()  
     bert = BertModel(label_list)    
     tokenizer =  AutoTokenizer.from_pretrained("bert-base-cased")
