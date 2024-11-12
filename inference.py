@@ -56,7 +56,7 @@ def merge_subwords(predictions):
     return merged_predictions
 
 
-def inference(sentence):
+def inference():
 
     with open("finetuned_model/label_list.txt", "r") as f:
         label_list = f.read().splitlines()  
@@ -76,7 +76,10 @@ def inference(sentence):
     json.dump(config, open("finetuned_model/config.json","w"))
     model_fine_tuned = AutoModelForTokenClassification.from_pretrained("finetuned_model")
     nlp = pipeline("ner",model=model_fine_tuned,tokenizer=tokenizer)
-    predictions = nlp(sentence)
+    return nlp
+
+def predict(model, sentence):
+    predictions = model(sentence)
     merged_result = merge_subwords(predictions)
     print("")
     print("output:")
@@ -85,22 +88,3 @@ def inference(sentence):
         print(prediction)
 
 
-def parse_args():
-    parser = argparse.ArgumentParser(
-        description="Keypoint Extraction Models",
-        formatter_class=argparse.ArgumentDefaultsHelpFormatter,
-    )
-    parser.add_argument(
-        "--sentence",
-        type=str,
-        help="sentence to predict",
-    )
-    args = parser.parse_args()
-
-
-
-    return args
-
-if __name__ == "__main__":
-    args = parse_args()
-    inference(args.sentence)
