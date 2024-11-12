@@ -3,7 +3,7 @@
 
  To finetune BERT classifier run
  ```bash
- python train.py --path dataset.csv
+ python train.py --path dataset.csv --num_epoch 6
 ```
  (replace with your dataset) 
 
