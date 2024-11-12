@@ -5,7 +5,7 @@ from model import BertModel
 import argparse
 import os
 
-def train_model(path):
+def train_model(path, epoch):
     try:
         dataset_dict = csv_to_dataset(path)
     except:
@@ -24,17 +24,16 @@ def train_model(path):
         learning_rate=2e-5,
         per_device_train_batch_size=16,
         per_device_eval_batch_size=16,
-        num_train_epochs=3,
+        num_train_epochs=epoch,
         weight_decay=0.01,
 
     )
     #save labels to file, create if not exists, create folder ./finetuned_model if not exists
     if not os.path.exists("./finetuned_model"): 
         os.makedirs("./finetuned_model")
-    if not os.path.exists("./finetuned_model/label_list.txt"):
-        with open("./finetuned_model/label_list.txt", "w") as f:
-            for label in labels:    
-                f.write(label + "\n")
+    with open("./finetuned_model/label_list.txt", "w") as f:
+        for label in labels:    
+            f.write(label + "\n")
     # Define the Trainer
     trainer = Trainer(
         model=bert.model,
@@ -61,6 +60,13 @@ def parse_args():
     parser.add_argument(
         "--path",
         type=str,
+        default="dataset.csv",
+        help="csv dataset path",
+    )
+    parser.add_argument(
+        "--num_epoch",
+        type=int,
+        default=6,
         help="csv dataset path",
     )
     args = parser.parse_args()
@@ -71,4 +77,4 @@ def parse_args():
 
 if __name__ == "__main__":
     args = parse_args()
-    train_model(args.path)
+    train_model(args.path, args.num_epoch) 
