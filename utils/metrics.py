@@ -9,7 +9,7 @@ def compute_metrics(eval_preds, label_list):
     pred_logits = np.argmax(pred_logits, axis=2)
     # the logits and the probabilities are in the same order,
     # so we don’t need to apply the softmax
-    with open("label_list.txt", "r") as f:
+    with open("./finetuned_model/label_list.txt", "r") as f:
         label_list = f.read().splitlines()
     # We remove all the values where the label is -100
     predictions = [
