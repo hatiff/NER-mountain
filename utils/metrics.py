@@ -1,7 +1,7 @@
 import evaluate
 import numpy as np
 
-def compute_metrics(eval_preds, label_list):
+def compute_metrics(eval_preds):
     
     pred_logits, labels = eval_preds
     print(eval_preds)
