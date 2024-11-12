@@ -78,6 +78,9 @@ def inference(sentence):
     nlp = pipeline("ner",model=model_fine_tuned,tokenizer=tokenizer)
     predictions = nlp(sentence)
     merged_result = merge_subwords(predictions)
+    print("")
+    print("output:")
+    print("")
     for prediction in merged_result:
         print(prediction)
 
