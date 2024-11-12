@@ -2,6 +2,9 @@
 from model import BertModel
 from transformers import AutoTokenizer, pipeline, AutoModelForTokenClassification
 import json
+import argparse
+import warnings
+warnings.filterwarnings('ignore')
 
 
 def merge_subwords(predictions):
@@ -77,3 +80,24 @@ def inference(sentence):
     merged_result = merge_subwords(predictions)
     for prediction in merged_result:
         print(prediction)
+
+
+def parse_args():
+    parser = argparse.ArgumentParser(
+        description="Keypoint Extraction Models",
+        formatter_class=argparse.ArgumentDefaultsHelpFormatter,
+    )
+    parser.add_argument(
+        "--sentence",
+        type=str,
+        help="sentence to predict",
+    )
+    args = parser.parse_args()
+
+
+
+    return args
+
+if __name__ == "__main__":
+    args = parse_args()
+    inference(args.sentence)

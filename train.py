@@ -63,7 +63,12 @@ def parse_args():
         type=str,
         help="csv dataset path",
     )
+    args = parser.parse_args()
+
+
+
+    return args
 
 if __name__ == "__main__":
     args = parse_args()
-    train_model(args)
+    train_model(args.path)
